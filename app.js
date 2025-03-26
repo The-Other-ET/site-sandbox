@@ -5,7 +5,7 @@ app.engine('html', require('ejs').renderFile)
 app.use(express.static(__dirname));
 
 app.get('/', (req, res) => {
-    res.render('home.html')
+    res.render('index.html')
 })
 
 app.listen(port, () => {
