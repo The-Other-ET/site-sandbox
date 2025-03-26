@@ -11590,7 +11590,7 @@ button:focus {
 
 .navbar-toggler-line:nth-child(1) {
   top: 0px;
-  width: 14px;
+  width: 22px;
 }
 
 .navbar-toggler-line:nth-child(2) {
@@ -11603,7 +11603,7 @@ button:focus {
 
 .navbar-toggler-line:nth-child(4) {
   top: 12px;
-  width: 14px;
+  width: 22px;
 }
 
 .navbar-collapse-show .navbar-toggler-line:nth-child(1) {
