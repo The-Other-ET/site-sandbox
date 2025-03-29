@@ -207,6 +207,7 @@ footer ul li {
         background-image: url(../images/demo-hosting-mobile-menu-bg.jpg);
         background-position: center center;
         background-size: cover;
+        align-items: first baseline;
     }
 }
 
