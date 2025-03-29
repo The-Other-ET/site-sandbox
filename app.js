@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 app.engine('html', require('ejs').renderFile)
 app.use(express.static(__dirname))
+app.set('views', __dirname)
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
@@ -10,7 +11,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.render('about')
+    res.render('views/about')
 })
 
 app.listen(port, () => {
