@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.render('views/about')
+    res.render('/views/about')
 })
 
 app.listen(port, () => {
