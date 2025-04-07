@@ -51,6 +51,7 @@ header .navbar-brand img {
 }
 
 .sticky .header-transparent .header-button .btn:hover {
+    background-color: var(--dark-gray);
     border-color: var(--dark-gray);
 }
 
