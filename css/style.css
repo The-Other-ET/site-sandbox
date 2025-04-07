@@ -470,6 +470,11 @@ strong {
   line-height: 5.625rem;
 }
 
+.fs-90-fixed {
+  font-size: 70px;
+  line-height: 70px;
+}
+
 .fs-95 {
   font-size: 5.938rem;
   line-height: 5.938rem;
