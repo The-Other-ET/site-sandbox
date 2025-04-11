@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact Form</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+                publicKey: "6RdbB0vAkbX8d4GYQ",
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            const submitButton = document.getElementById('submitButton');
+            const submitStatus = document.getElementById('submitStatus');
+            const form = document.getElementById('contact-form');
+            document.getElementById('contact-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                // these IDs from the previous steps
+                submitStatus.innerHTML = 'Sending...';
+                submitStatus.style.color = 'black';
+                form.style.display = 'none';
+                emailjs.sendForm('service_vedw96o', 'template_a9o31ik', this)
+                    .then(() => {
+                        submitStatus.innerHTML = 'Email sent successfully!';
+                        submitStatus.style.color = 'green';
+                        console.log('SUCCESS!');
+                    }, (error) => {
+                        console.log('FAILED...', error);
+                        submitStatus.innerHTML = 'Email failed to send. Please refresh and try again.';
+                        submitStatus.style.color = 'red';
+                    });
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <form id="contact-form">
+        <label>Name</label>
+        <input type="text" name="name" required>
+        <label>Email</label>
+        <input type="email" name="email" required>
+        <label>Subject</label>
+        <input type="text" name="title" required>
+        <label>Message</label>
+        <textarea name="message" required></textarea>
+        <button id="submitButton" type="submit">Send</button>
+    </form>
+    <p id="submitStatus"></p>
+</body>
+
+</html>
