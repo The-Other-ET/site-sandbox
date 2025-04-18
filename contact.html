@@ -22,6 +22,41 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/hosting.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+                publicKey: "6RdbB0vAkbX8d4GYQ",
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            const submitButton = document.getElementById('submitButton');
+            const formResult = document.getElementById('formResult');
+            const submitStatus = document.getElementById('submitStatus');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const form = document.getElementById('contactForm');
+            document.getElementById('contactForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                // these IDs from the previous steps
+                loadingSpinner.classList.remove('d-none');
+                form.style.display = 'none';
+                emailjs.sendForm('service_vedw96o', 'template_a9o31ik', this)
+                    .then(() => {
+                        loadingSpinner.classList.add('d-none');
+                        submitStatus.innerHTML = 'Message sent successfully - CCO Henry thanks you for your interest!';
+                        formResult.classList.remove('d-none');
+                        formResult.classList.add('d-flex');
+                        console.log('SUCCESS!');
+                    }, (error) => {
+                        console.log('FAILED...', error);
+                        submitStatus.innerHTML = 'Message failed to send. Please refresh and try again.';
+                    });
+            });
+        }
+    </script>
 </head>
 
 <body data-mobile-nav-style="classic" data-mobile-nav-bg-color="">
@@ -154,15 +189,14 @@
                             <img src="https://placehold.co/100x62" alt="">
                         </div>
                         <div class="feature-box-content">
-                            <span class="text-dark-gray fs-19 fw-600 d-block">Call us directly</span>
+                            <span class="text-dark-gray fs-19 fw-600 d-block">Text us!</span>
                             <span>+1 234 567 8910</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7 offset-xxl-1">
                     <!-- start contact form -->
-                    <form id="contactForm" name="contactForm" action="https://formspree.io/f/xzzeknda" method="POST"
-                        class="contact-form-style-03">
+                    <form id="contactForm" name="contactForm" class="contact-form-style-03">
                         <div class="row justify-content-center">
                             <div class="col-md-6 xs-mb-30px">
                                 <label for="exampleInputEmail1"
@@ -216,7 +250,7 @@
                                 <div class="position-relative form-group form-textarea mb-0">
                                     <textarea
                                         class="ps-0 border-radius-0px border-color-dark-gray bg-transparent form-control"
-                                        name="comment" placeholder="Describe about your project" rows="4"></textarea>
+                                        name="message" placeholder="Describe about your project" rows="4"></textarea>
                                     <span class="form-icon"><i class="bi bi-chat-square-dots text-dark-gray"></i></span>
                                 </div>
                             </div>
@@ -225,16 +259,26 @@
                             </div>
                             <div class="col-xl-6 col-md-5 text-center text-md-end sm-mt-25px">
                                 <input id="exampleInputEmail5" type="hidden" name="redirect" value="">
-                                <button
-                                    class="btn btn-small btn-dark-gray btn-box-shadow btn-round-edge text-transform-none primary-font submit"
+                                <button id="submitButton"
+                                    class="btn btn-small btn-dark-gray btn-box-shadow btn-round-edge text-transform-none primary-font"
                                     type="submit">Send message</button>
                             </div>
-                            <div class="col-12">
-                                <div id="formStatus" class="form-results mt-20px d-flex"></div>
-                            </div>
                         </div>
+
                     </form>
                     <!-- end contact form -->
+                    <!-- start contact form loading status -->
+                    <div class="d-flex justify-content-center align-items-center flex-column mt-30px">
+                        <div id="loadingSpinner" class="spinner-border text-dark-gray d-none" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="formResult" class="d-none flex-column align-items-center">
+                            <img id="henry" class="h-100px" src="/images/henry-head.png" alt="">
+                            <div id="submitStatus" class="form-results mt-20px d-flex text-dark-gray">Testing!
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end contact form loading status -->
                 </div>
             </div>
         </div>
@@ -323,39 +367,6 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/vendors.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    <script>
-        var form = document.getElementById("contactForm");
-
-        async function handleSubmit(event) {
-            console.log("handleSubmit called");
-            event.preventDefault();
-            var status = document.getElementById("formStatus");
-            var data = new FormData(event.target);
-            fetch(event.target.action, {
-                method: form.method,
-                body: data,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                console.log(`fetch called with action: ${event.target.action}, method: ${form.method}, body: ${data}, headers: ${headers}`)
-                if (response.ok) {
-                    status.innerHTML = "Thanks for your submission!";
-                    form.reset()
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
-                        } else {
-                            status.innerHTML = "Oops! There was a problem submitting your form"
-                        }
-                    })
-                }
-            }).catch(error => {
-                status.innerHTML = "Oops! There was a problem submitting your form"
-            });
-        }
-        form.addEventListener("submit", handleSubmit);</script>
 </body>
 
 </html>

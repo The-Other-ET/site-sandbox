@@ -25,6 +25,10 @@ app.get('/testform', (req, res) => {
     res.render('emailjs-test.html')
 })
 
+app.get('/contact', (req, res) => {
+    res.render('contact.html')
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
