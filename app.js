@@ -13,20 +13,26 @@ app.use(express.static(__dirname))
 app.set('/', __dirname)
 app.set('view engine', 'ejs')
 
+
+// Routes
 app.get('/', (req, res) => {
-    res.render('index.html')
+    res.render('index')
 })
 
 app.get('/about', (req, res) => {
-    res.render('about.html')
+    res.render('about')
 })
 
-app.get('/testform', (req, res) => {
-    res.render('emailjs-test.html')
-})
+// app.get('/testform', (req, res) => {
+//     res.render('emailjs-test')
+// })
 
 app.get('/contact', (req, res) => {
-    res.render('contact.html')
+    res.render('contact')
+})
+
+app.get('/services', (req, res) => {
+    res.render('services')
 })
 
 app.listen(port, () => {
