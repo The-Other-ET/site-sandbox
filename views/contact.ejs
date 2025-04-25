@@ -23,40 +23,8 @@
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/hosting.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-            // https://dashboard.emailjs.com/admin/account
-            emailjs.init({
-                publicKey: "6RdbB0vAkbX8d4GYQ",
-            });
-        })();
-    </script>
-    <script type="text/javascript">
-        window.onload = function () {
-            const submitButton = document.getElementById('submitButton');
-            const formResult = document.getElementById('formResult');
-            const submitStatus = document.getElementById('submitStatus');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const form = document.getElementById('contactForm');
-            document.getElementById('contactForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-                // these IDs from the previous steps
-                loadingSpinner.classList.remove('d-none');
-                form.style.display = 'none';
-                emailjs.sendForm('service_vedw96o', 'template_a9o31ik', this)
-                    .then(() => {
-                        loadingSpinner.classList.add('d-none');
-                        submitStatus.innerHTML = 'Message sent successfully - CCO Henry thanks you for your interest!';
-                        formResult.classList.remove('d-none');
-                        formResult.classList.add('d-flex');
-                        console.log('SUCCESS!');
-                    }, (error) => {
-                        console.log('FAILED...', error);
-                        submitStatus.innerHTML = 'Message failed to send. Please refresh and try again.';
-                    });
-            });
-        }
-    </script>
+    <script type="text/javascript" src="js/emailjsInit.js"></script>
+    <script type="text/javascript" src="js/emailjsSubmit.js"></script>
 </head>
 
 <body data-mobile-nav-style="classic" data-mobile-nav-bg-color="">
