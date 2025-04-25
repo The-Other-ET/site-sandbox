@@ -35,6 +35,10 @@ app.get('/services', (req, res) => {
     res.render('services')
 })
 
+app.get('/partialstest', (req, res) => {
+    res.render('partials-test')
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
